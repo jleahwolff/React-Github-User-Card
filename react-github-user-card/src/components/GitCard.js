@@ -1,72 +1,67 @@
 import React from 'react';
-import {
-    CardColumns,
-    Card,
-    CardImg,
-    CardBlock,
-    CardTitle,
-    CardSubtitle,
-    CardText,
-    Button,
-    CardGroup
-} from '@bootstrap-styled/v4';
+import './gitcard.css';
+
+// import { CardBlock, CardSubtitle, CardText, CardTitle } from 'bootstrap';
 
 export default function GitCard(props) {
     return (
         <div className="user-div">
-            <CardColumns>
-                <Card
+
+        <div className="card-column">
+                <div className="card"
                     style={{
-                        width: "20%",
+                        width: "70%",
                         margin: '0 auto',
+                        display: "flex",
+                        justifyContent: "center",
                         backgroundColor: "pink",
                     }}>
-                    <CardImg
+                    <img
                         top
-                        width="100%"
+                        width="50%"
                         src={props.user.avatar_url}
                         alt="profile photo"
                         />
-                    <CardBlock>
-                        <CardTitle>{props.user.name}</CardTitle>
-                        <CardSubtitle>location: {props.user.location}</CardSubtitle>
-                        <CardText>{props.user.bio}</CardText>
-                        <Button href={`${props.user.html_url}`} target='_blank'> Go To Github </Button>
-                    </CardBlock>
-                    </Card>
-            </CardColumns>
-            <CardGroup
+                    <div className="card-block">
+                        <h1>{props.user.name}</h1>
+                        <h3>location: {props.user.location}</h3>
+                        <p>{props.user.bio}</p>
+                        <button href={`${props.user.html_url}`} target='_blank'> Go To Github </button>
+                    </div>
+                    </div>
+            </div>
+            <div className="card-groups"
                 style={{
                     width: '100%',
                     display: 'flex',
                     flexWrap: 'wrap',
-                    justify-content: 'space-evenly',
+                    // justify-content: 'space-evenly',
                     margin: '0 auto',
                     color: 'lightblue'
                 }}>
 
                 {props.followers.map(followers => (
-                    <Card
-                        style={{
-                            width= "25%",
-                            background="dodgerblue",
-                            color="white"
-                        }}>
-                    <CardImg
+                    <div className="card"
+                    style={{
+                        width: "25%",
+                        background:"dodgerblue",
+                        color:"white"
+                    }}>
+                    {/* <img
                         top
-                        width= '100%',
-                        src={props.followers.avatar_url},
+                        width= '100%'
+                        src={props.followers.avatar_url}
                         alt="Followers profile image"
-                        />
-                    <CardBlock>
-                        <CardTitle>{followers.login}</CardTitle>
-                        <Button href={`${followers.html_url}`} target='_blank'>
+                        /> */}
+                    <div className="card-block">
+                        <h3>{followers.login}</h3>
+                        <button href={`${followers.html_url}`} target='_blank'>
                             Go to Github
-                        </Button>
-                    </CardBlock>    
-                </Card>
+                        </button>
+                    </div>    
+                </div>
                 ))}
-                <CardGroup/>
-        </div>
+                </div>
+                </div>
     );
 }

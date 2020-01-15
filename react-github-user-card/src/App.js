@@ -1,60 +1,55 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
 import './App.css';
 import Card from './components/GitCard';
-import Search from './components/SearchForm';
+// import Search from './components/SearchForm';
 
-class App extends Component {
-  super();
-  this.state = {
+class App extends React.Component {
+  state = {
     user: [],
     followers: []
-  }
+  };
   
   componentDidMount() {
     axios
     .get('https://api.github.com/users/jleahwolff')
     .then( res => {
-      console.log(res, `data`);
       this.setState({
         user: res.data
       })
+      console.log(res, `user data`)
     })
-    .catch (err => console.log(err));
-    
+    .catch (err => console.log(err))
+    .finally(  
     axios
     .get('https://api.github.com/users/jleahwolff/followers')
-    .then (res => {
-      console.log(res.data, `followers`);
+    .then ( res => {
+      console.log(res.data, `followers`)
       this.setState({
         followers: res.data
       });
     })
-    .catch(err => console.log(err));
+    .catch( err => console.log(err))
+    )
   }
   
   
-  
-  function App() {
+  render() {
+    console.log(this.state.user, `user`);
     return (
       <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-          >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-};
+        <h1
+          style={{
+            width: '100%',
+            background: 'black',
+            color: 'white'
+          }}>
+            GITHUB USER DATA
+          </h1>
+          <Card user={this.state.user} followers={this.state.followers} />
+      </div>
+    )
+  }
 }
 
 export default App;
