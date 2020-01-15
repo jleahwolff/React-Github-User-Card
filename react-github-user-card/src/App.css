@@ -1,0 +1,15 @@
+.App {
+  text-align: center;
+  width:900px;
+  margin: 0 auto;
+}
+
+html {
+  background-color: violet;
+}
+
+.user-div {
+  background-color: yellow;
+  width:100%;
+}
+
